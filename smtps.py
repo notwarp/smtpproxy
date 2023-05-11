@@ -165,7 +165,7 @@ class SMTPServerEngine:
 		construction time.
 		"""
 
-		self.socket.send("220 Python smtps\r\n")
+		self.socket.send(b'220 Python smtps\r\n')
 		while 1:
 			data = ''
 			completeLine = 0
@@ -300,7 +300,7 @@ class SMTPServer:
 		while 1:
 			nsd = self._socket.accept()
 			engine = SMTPServerEngine(nsd[0], Implclass(), self._log)
-			thread.start_new_thread(self.handleConnection, (engine, ))
+			start_new_thread(self.handleConnection, (engine, ))
 
 	def handleConnection(self, engine):
 		""" Internal function that is called as a new thread to chug the
